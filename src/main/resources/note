@@ -1,0 +1,28 @@
+SpringBoot:
+①：注解
+   @RestController 包含了@Controller,@ResponseBody  所以方法上面无需指定，返回的是json格式数据
+   @MapperScan 扫描mapper接口
+
+②：静态资源访问
+   路径：
+   /** 默认访问根目录下的static
+   http://localhost:8080/fengjing2.jpg 默认访问 src\main\resources\static\fengjing2.jpg
+   版本控制：
+   沿用以往ssm框架*.js?v=1.0.1 也可以
+③：mybatis集成
+   mapper接口扫描：应用启动加注解 @MapperScan("包路径"),或者有实现MyBatisMapperScannerConfig去扫描接口的类
+           实际测试过： 应用不加@MapperScan 统一扫描，在每个mapper接口上 @Mapper 是可以的
+   mapper 映射文件和 别名typeAliases配置在 application.properties 中
+   关于通用mapper和pageHelper分页助手, 简单业务写写也不费事，复杂业务都用不上或者最好不要用
+   so: 系统还是不要杂七杂八搞太多形式，mybatis采用xml配置更合适，弃用通用mapper和pageHelper,sql都写在映射文件最统一，便于维护
+   打印日志
+
+④：系统业务参数配置
+   增加应用配置文件
+   http://docs.spring.io/spring-boot/docs/1.4.1.RELEASE/reference/htmlsingle/#boot-features-external-config-profile-specific-properties
+   so: while spring.profiles.active=dev  系统自动读取 application-dev.properties
+       while spring.profiles.active=pro  系统自动读取 application-pro.properties
+⑤：事务管理
+   简易：@EnableTransactionManagement
+        service 类上加@Transactional 对此类所有方法启用事务 ； 在指定方法加@Transactional事务应用到该方法
+⑥: thymeleaf

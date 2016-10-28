@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+<!--       * 如果在 logback2.xml 和 application.properties 中定义了相同的配置（如都配置了 org.springframework.web）
+       但是输出级别不同，则实际上 application.properties 的优先级高于 logback2.xml *-->
+       <include resource="org/springframework/boot/logging/logback/base.xml" />
+       <logger name="org.springframework.web" level="INFO"/>
+       <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+       <springProfile name="default">
+              <logger name="com.example.demo" level="TRACE" />
+       </springProfile>
+
+       <springProfile name="dev">
+              <logger name="com.example.demo" level="DEBUG" />
+       </springProfile>
+
+       <springProfile name="staging">
+              <logger name="com.example.demo" level="INFO" />
+       </springProfile>
+       <!-- show parameters for hibernate sql 专为 Hibernate 定制 -->
+       <!--   <logger name="org.hibernate.type.descriptor.sql.BasicBinder"  level="TRACE" />
+          <logger name="org.hibernate.type.descriptor.sql.BasicExtractor"  level="DEBUG" />
+          <logger name="org.hibernate.SQL" level="DEBUG" />
+          <logger name="org.hibernate.engine.QueryParameters" level="DEBUG" />
+          <logger name="org.hibernate.engine.query.HQLQueryPlan" level="DEBUG" />-->
+
+       <!--myibatis log configure-->
+       <!--    <logger name="com.apache.ibatis" level="TRACE"/>
+           <logger name="java.sql.Connection" level="DEBUG"/>
+           <logger name="java.sql.Statement" level="DEBUG"/>
+           <logger name="java.sql.PreparedStatement" level="DEBUG"/>-->
+
+
+       <!--  &lt;!&ndash;日志异步到数据库 &ndash;&gt;
+         <appender name="DB" class="ch.qos.logback.classic.db.DBAppender">
+             &lt;!&ndash;日志异步到数据库 &ndash;&gt;
+             <connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">
+                 &lt;!&ndash;连接池 &ndash;&gt;
+                 <dataSource class="com.mchange.v2.c3p0.ComboPooledDataSource">
+                     <driverClass>com.mysql.jdbc.Driver</driverClass>
+                     <url>jdbc:mysql://127.0.0.1:3306/databaseName</url>
+                     <user>root</user>
+                     <password>root</password>
+                 </dataSource>
+             </connectionSource>
+         </appender>-->
+</configuration>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="config/mapper.properties">
+            <!-- 此文件可配置一些在sql语句可能会用到,然后生产环境和开发环境不同的参数：
+            情景：sql中使用到了同一个mysql两个数据库中的表做操作,一般来说直接连接的是某一个主要的库，
+                 获取别的库时就要指定 库名.表名来查询了。此时 库名就需要配置了。写死的话，每次改动都可能遗漏
+            -->
+        <!--<property name="recordStartIndex" value="0"/>-->
+        <!--<property name="pageSizeMax" value="10"/>-->
+    </properties>
+    <settings>
+        <setting name="cacheEnabled" value="true" />
+        <setting name="lazyLoadingEnabled" value="true" />
+        <!--<setting name="aggressiveLazyLoading" value="false"/>-->
+        <setting name="useGeneratedKeys" value="true" />
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
+    <typeAliases>
+        <package name="com.example.model"/>
+    </typeAliases>
+
+   <plugins>
+       <!-- 分页助手 -->
+       <plugin interceptor="com.github.pagehelper.PageHelper">
+           <property name="dialect" value="mysql"/>
+           <property name="rowBoundsWithCounts" value="true"/>
+       </plugin>
+       <!-- 使用通用mapper简化单表操作-->
+       <plugin interceptor="com.github.abel533.mapperhelper.MapperInterceptor">
+           <property name="IDENTITY" value="mysql"/>
+           <!-- 通用mapper接口-->
+           <property name="mappers" value="com.github.abel533.mapper.Mapper"/>
+       </plugin>
+   </plugins>
+
+</configuration>

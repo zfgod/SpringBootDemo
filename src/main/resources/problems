@@ -1,0 +1,13 @@
+
+1.静态资源版本控制 ：http://blog.csdn.net/catoop/article/details/50501706
+
+2.日志打印sql语句： logger 级别debug时,配置logback.xml不管添加与不添加mybatis相关配置，都能看到sql
+                  但是debug级别的日志实在太多，有没有info级别时也能看到sql语句
+                  org.apache.ibatis.logging.slf4j.Slf4jImpl里的源码没有INFO ...
+        解决：mybatis去实现log输出,mybatis是早就完成了的http://www.mybatis.org/mybatis-3/zh/configuration.html#settings
+        springboot去集成mybatis,可能有他的独特的配置方式，
+        但是以往ssm框架mybatis的配置文件里设置settings很easy,所以springboot还是读取mybatis的配置文件然后设置即可
+        application.properties :mybatis.config-location=classpath:mybatis-config.xml
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+        so：mybatis的其他一些配置其实也可以在mybatis-config.xml中统一配置
+            but: mapper映射文件 在mybatis-config里面不起作用。。。然后别名又可以在mybatis-config里面配置。。
