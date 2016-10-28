@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title> sse push</title>
+
+</head>
+<body>
+   hello
+<div id="msgPush"></div>
+   <script>
+       if (!Window.EventSource){
+           var source = new EventSource('push');
+           s='';
+           source.addEventListener('message',function(e){
+               s += e.data+"<br/>";
+               document.getElementById("msgPush").innerHTML = s;
+           });
+           source.addEventListener('open',function(e){
+               console.log("链接打开。。");
+           },false);
+           source.addEventListener('error',function(e){
+               if(e.readyState == EventSource.CLOSED){
+                   console.log("链接关闭。。");
+               }else{
+                   console.log(e.readyState);
+               }
+               console.log("链接关闭。。");
+           },false);
+
+       }else{
+           console.log("您的浏览器不支持SSE！")
+       }
+   </script>
+</body>
+</html>

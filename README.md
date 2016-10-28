@@ -6,6 +6,7 @@
              开发与生产环境系统变量分别配置，第一份thymeleaf模板
          demo基础剩余：
              thymeleaf模板概念解读和实战，springboot运行原理，springboot内置server和其他默认配置解读
+             springBoot开发 单元测试 （pro/dev 切换配置）
              项目开发热部署？（不知道有么有），项目服务器部署和配置
              。。。先停止博客学习，阅读<<SpringBoot>>
          demo进阶：    
@@ -17,7 +18,7 @@
              Spring回顾+SpringBoot运行原理
              SpringBoot的Web开发：
                     thymeleaf模板深入,Tomcat配置，Bootstrap和AngularJs
-             SpringBooot企业级开发
+             SpringBoot企业级开发
              了解SpringCloud       
                     
              
