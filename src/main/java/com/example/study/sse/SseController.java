@@ -15,18 +15,19 @@ import java.util.Random;
 public class SseController {
     @RequestMapping(value = "/goPush1")
     public String goH51(){
-       return "/push";
+
+        return "/stu/push";
     }
 
     @RequestMapping(value = "/goPush2")
     public String goH52(){
-        return "/pushTest";
+        return "/stu/pushTest";
     }
     @RequestMapping(value = "/push",produces = "text/event-stream")
     public @ResponseBody String push(){
         Random r =new Random();
         try {
-//            so 这里可以根据需要触发
+//          so 这里可以根据需要触发 ,系统有相关操作后进行调用并获取推送数据
             Thread.sleep(5000);//5秒
         }catch (Exception e){
             e.printStackTrace();

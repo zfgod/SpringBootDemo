@@ -8,8 +8,9 @@ import java.io.IOException;
  * author: zf
  * Date: 2016/10/26  10:29
  * Description: 随web应用生而生，毁而毁
+ * asyncSupported = true 支持异步请求
  */
-@WebFilter(filterName="myFilter",urlPatterns="/*")
+@WebFilter(filterName="myFilter",urlPatterns="/*",asyncSupported = true)
 public class BaseFilter implements Filter {
 
     @Override

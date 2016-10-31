@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>springBoot 异步请求</title>
+    <script>
+        function loadXMLDoc()
+        {
+            var xmlhttp;
+            if (window.XMLHttpRequest)
+            {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp=new XMLHttpRequest();
+            }
+            else
+            {// code for IE6, IE5
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange=function()
+            {
+                if (xmlhttp.status==200)
+                {
+                    document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+                }
+            }
+            xmlhttp.open("GET","/async/test",true);
+            xmlhttp.send();
+        }
+    </script>
+</head>
+<body>
+<h1>长连接测试</h1>
+<div id="myDiv">
+    <span>Let AJAX change this text</span>
+</div>
+<button type="button" onclick="loadXMLDoc()">异步 AJAX 内容</button>
+</body>
+</html>
