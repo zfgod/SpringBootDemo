@@ -122,14 +122,14 @@
         <artifactId>spring-boot-starter-websocket</artifactId>
         <!--<version>1.4.1.RELEASE</version>-->
         </dependency>
-        <dependency>
+    <!--    <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-messaging</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-websocket</artifactId>
-        </dependency>
+        </dependency>-->
 
         <!-- 测试模块-->
         <dependency>
