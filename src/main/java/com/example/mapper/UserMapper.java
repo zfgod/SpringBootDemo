@@ -1,6 +1,6 @@
 package com.example.mapper;
 
-import com.example.model.Usera;
+import com.example.model.Users;
 import com.github.abel533.mapper.Mapper;
 
 
@@ -10,7 +10,7 @@ import com.github.abel533.mapper.Mapper;
  * Description:
  */
 
-public interface UserMapper extends Mapper<Usera> {
+public interface UserMapper extends Mapper<Users> {
 
 
 }

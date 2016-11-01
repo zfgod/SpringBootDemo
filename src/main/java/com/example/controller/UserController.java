@@ -1,7 +1,7 @@
 package com.example.controller;
 
 import com.example.mapper.UserMapper;
-import com.example.model.Usera;
+import com.example.model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +23,7 @@ public class UserController {
 
     @RequestMapping("/list")
     public String getUserList(Model model){
-        List<Usera> users = userMapper.selectByExample(null);
+        List<Users> users = userMapper.selectByExample(null);
         model.addAttribute("users",users);
         model.addAttribute("single",users.get(0));
         return "/user/main";
