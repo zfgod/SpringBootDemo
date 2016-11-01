@@ -1,4 +1,6 @@
 SpringBoot:
+   自动配置参数见：
+   spring-boot-autoconfigure-1.4.1.RELEASE.jar!/META-INF/spring-configuration-metadata.json
 ①：注解
    @RestController 包含了@Controller,@ResponseBody  所以方法上面无需指定，返回的是json格式数据
    @MapperScan 扫描mapper接口

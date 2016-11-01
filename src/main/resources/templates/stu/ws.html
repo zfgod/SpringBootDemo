@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en"
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>webSocket-广播式</title>
+    <script th:src="@{sockjs.min.js}" type="text/javascript"></script>
+    <script th:src="@{stomp.min.js}" type="text/javascript"></script>
+    <script th:src="@{jquery-1.11.2.min.js}" type="text/javascript"></script>
+    <script type="text/javascript">
+        var stompClient = null;
+        function setConnected(connected){
+            document.getElementById('connect').isDisabled = connected;
+            document.getElementById('disconnect').isDisabled = !connected;
+            /*document.getElementById('conversationDiv').style.visibility=
+                    connected ? 'visiable' : 'hidden';
+            $('response').html();*/
+        }
+        function connect(){
+            var socket = new SockJS('/endPointZfGod');//连接SockJS的endpoint名称为 /endPointZfGod
+
+            stompClient = Stomp.over(socket);//使用STOMP子协议的webSocket客户端
+            stompClient.connect({},function(frame){//连接webSocket服务端
+               setConnected(true);
+               console.log('Connected:'+frame);
+                //订阅：/topic/getResponse 目标发送的消息，@SendTo("/topic/getResponse")
+                stompClient.subscribe('/topic/getResponse',function(response){
+                    var m = JSON.parse(response.body);
+                    document.getElementById('response').innerHTML = m.resMsg;
+                });
+            });
+        }
+
+        function disconnect(){
+            if(stompClient != null){
+                stompClient.disconnect();
+            }
+            setConnected(false);
+            console.log('disconnected');
+        }
+
+        function sendName(){
+            var name = $('#name').val();
+            //向服务器发送消息，目标：/wsWelcome ,@MessageMapping("/wsWelcome")
+            stompClient.send("/wsWelcome",{},JSON.stringify({'name':name}));
+
+        }
+    </script>
+</head>
+<body onload="disconnect()">
+    <noscript>貌似你的浏览器不支持</noscript>
+    <div>
+        <button id="connect" onclick="connect();">连接</button>
+        <button id="disconnect" disabled="disabled" onclick="disconnect();">断开</button>
+    </div>
+ <div id="conversationDiv">
+     <label>输入你的名字：</label><input type="text" id="name"/>
+     <button id="sendName" onclick="sendName();" >发送</button>
+     <span id="response"></span>
+ </div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+默认参数
+org/springframework/boot/autoconfigure/thymeleaf/ThymeleafProperties.java
+ html中使用：templates/user/main.html
+ 1.基础： 是一个java类库，xml/h5的模板引擎，view层
+        xmlns:th=http://www.thymeleaf.org 命名空间 ，静态页面转换为动态视图
+       动态处理元素： "th:" 为前缀        所有动态内容都需要此前缀：如引用web资源和加载model数据
+       @{} 引用web静态资源
+       2.访问model中的数据：
+          "${}"
+          迭代： th : each = "item : $ {items} "
+          条件判断：支持< ,>, == ,<=  ,>= ,!= 以及SpringEL表达式用于条件中
+              th：if="${not #lists.isEmpty(items)}"
+          在javascript中访问model中的值：
+            取值支持： <script  th:inline="javascript">
+                             </script>
+            取值格式：  [[ ${  } ]]
+
+          在html的代码里访问model属性
+                th:onclick="'getUser(\''+${user.name}+'\');'"

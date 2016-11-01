@@ -1,0 +1,39 @@
+springBoot 内嵌很多应用,并提供了默认的设置
+
+关于内嵌,如spring-boot-starter-web.jar
+        这里面就内嵌了tomcat以及springMvc的依赖支持,内嵌应用,修改依赖树就行了
+关键是,每个应用的默认参数配置,springBoot显得尤为简单实用
+     分析学习其配置参数配置源码,方便如何自行修改和增加参数配置
+     拿org.springframework.boot.autoconfigure.web.HttpEncodingAutoConfiguration来说
+     springBoot对于springMvc配置http请求参数编码的配置
+     其一：
+       使用类型安全的参数配置： org.springframework.boot.autoconfigure.web.HttpEncodingProperties
+       代码：@ConfigurationProperties
+       @ConfigurationProperties(prefix = "spring.http.encoding")
+       public class HttpEncodingProperties {
+       参数配置见：
+       spring-boot-autoconfigure-1.4.1.RELEASE.jar!/META-INF/spring-configuration-metadata.json
+        参数charset:    {
+              "name": "spring.http.encoding.charset",
+              "type": "java.nio.charset.Charset",
+              "description": "Charset of HTTP requests and responses. Added to the \"Content-Type\" header if not\n set explicitly.",
+              "sourceType": "org.springframework.boot.autoconfigure.web.HttpEncodingProperties",
+              "defaultValue": "UTF-8"
+            }
+     其二：
+        使用自动配置类,注入类型安全的参数类,进行对应的参数配置
+        org.springframework.boot.autoconfigure.web.HttpEncodingAutoConfiguration
+@Configuration
+@EnableConfigurationProperties(HttpEncodingProperties.class)
+@ConditionalOnWebApplication
+@ConditionalOnClass(CharacterEncodingFilter.class)
+@ConditionalOnProperty(prefix = "spring.http.encoding", value = "enabled", matchIfMissing = true)
+public class HttpEncodingAutoConfiguration {
+
+	private final HttpEncodingProperties properties;
+
+	public HttpEncodingAutoConfiguration(HttpEncodingProperties properties) {
+		this.properties = properties;
+	}
+
+	如此,从内嵌应用,到配置应用的默认参数就完成了,而我们只需要启动项支持自动配置就能运行
