@@ -2,12 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="UTF-8"/>
+    <script th:src="@{/js/main.js}"></script>
     <title>hello SpringBoot</title>
 </head>
 <body>
-      hello springBoot thymeleaf
+      hello springBoot thymeleaf fff
     <div>
+
+
         <span th:text="${hello}"/>
+        <span th:text="${sessionTime}"/>
     </div>
 </body>
 </html>

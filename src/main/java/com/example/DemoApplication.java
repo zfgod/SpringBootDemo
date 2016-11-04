@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @RestController //此类作为controller进行注入
 @EnableAsync    //支持异步请求
+@EnableCaching  //开启缓存支持
 @ServletComponentScan //
 @MapperScan("com.example.mapper")//mybatis mapper接口扫描
 @EnableTransactionManagement // 启注解事务管理，等同于xml配置方式的 <tx:annotation-driven />
@@ -30,7 +32,7 @@ public class DemoApplication {
 	@RequestMapping("/")
 	String home(){
 
-		return "hello SpringBoot-"+projectName+customerParam.toString();
+		return "hello SpringBoot...-"+projectName+" i am "+customerParam.getName();
 	}
 
 	public static void main(String[] args) {

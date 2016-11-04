@@ -11,3 +11,4 @@
         <setting name="logImpl" value="STDOUT_LOGGING"/>
         so：mybatis的其他一些配置其实也可以在mybatis-config.xml中统一配置
             but: mapper映射文件 在mybatis-config里面不起作用。。。然后别名又可以在mybatis-config里面配置。。
+3.webSocket 点对点通信 消息订阅不成功

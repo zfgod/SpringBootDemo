@@ -12,9 +12,6 @@
         function setConnected(connected){
             document.getElementById('connect').isDisabled = connected;
             document.getElementById('disconnect').isDisabled = !connected;
-            /*document.getElementById('conversationDiv').style.visibility=
-                    connected ? 'visiable' : 'hidden';
-            $('response').html();*/
         }
         function connect(){
             var socket = new SockJS('/endPointZfGod');//连接SockJS的endpoint名称为 /endPointZfGod
@@ -50,10 +47,10 @@
 <body onload="disconnect()">
     <noscript>貌似你的浏览器不支持</noscript>
     <div>
-        <button id="connect" onclick="connect();">连接</button>
-        <button id="disconnect" disabled="disabled" onclick="disconnect();">断开</button>
+        <button id="connect"     onclick="connect();">连接</button>
+        <button id="disconnect"  onclick="disconnect();">断开</button>
     </div>
- <div id="conversationDiv">
+ <div id="conversationDiv" >
      <label>输入你的名字：</label><input type="text" id="name"/>
      <button id="sendName" onclick="sendName();" >发送</button>
      <span id="response"></span>

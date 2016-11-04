@@ -16,6 +16,8 @@ public class WebMvcWSConfig  extends WebMvcConfigurerAdapter{
         //增加一个 测试webSocket的快捷映射
         //相当于在controller中写一个路径为/ws 的方法,返回此页面视图
         registry.addViewController("/ws").setViewName("/stu/ws");//templates/stu/ws.html
+        registry.addViewController("/wsLogin").setViewName("/stu/wsLogin");//templates/stu/wsLogin.html
+        registry.addViewController("/wsChat").setViewName("/stu/wsChat");//templates/stu/wsChat.html
     }
 
 }

@@ -7,7 +7,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  * Date: 2016/10/28  11:34
  * Description: 测试aop 注解式、方法规则式
  */
-public class Main {
+public class Run {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(AopConfig.class);

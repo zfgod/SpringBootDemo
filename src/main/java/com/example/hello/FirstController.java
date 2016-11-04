@@ -1,5 +1,6 @@
 package com.example.hello;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,9 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 //@RestController （ @Controller @ResponseBody)
 @RestController
 public class FirstController {
+
+    @Value("${server.session.timeout}")
+    private String sessionTime;
+
      @RequestMapping(value = "/hello")
     public String index(){
-        return "hello zf";
+        return "hello zfaa"+"--"+sessionTime;
     }
 
 

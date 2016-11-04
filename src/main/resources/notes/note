@@ -3,7 +3,7 @@ SpringBoot:
    spring-boot-autoconfigure-1.4.1.RELEASE.jar!/META-INF/spring-configuration-metadata.json
 ①：注解
    @RestController 包含了@Controller,@ResponseBody  所以方法上面无需指定，返回的是json格式数据
-   @MapperScan 扫描mapper接口
+
 
 ②：静态资源访问
    路径：
@@ -27,4 +27,35 @@ SpringBoot:
 ⑤：事务管理
    简易：@EnableTransactionManagement
         service 类上加@Transactional 对此类所有方法启用事务 ； 在指定方法加@Transactional事务应用到该方法
-⑥: thymeleaf
+⑥: thymeleaf：
+    spring.thymeleaf.cache=false 开发时关闭缓存
+
+⑦：开发热部署：
+a. 类文件热部署
+    下载  springloaded-1.2.5.RELEASE.jar
+    -javaagent:C:\javainstalls\jar\springloaded-1.2.5.RELEASE.jar -noverify
+    修改启动配置 VM参数
+    图片中 springload.png - javaagent 有空格，应不能有空格
+    当修改文件之后，手动保持文件并编译  compile 可以修改keymap compile的快捷键 快速编译
+b. thymeleaf模板热部署：
+    spring.thymeleaf.cache=false
+c. JRebel： 需收费
+d. 添加spring-boot-devtools依赖 ： 代码热部署支持
+   devtools：是boot的一个热部署工具，
+   当我们修改了classpath下的文件（包括类文件、属性文件、页面等）时， 会重新启动应用
+   双类加载器机制：boot使用了两个类加载器来实现重启（restart）机制：base类加载器（简称bc）+restart类加载器（简称rc）。
+   bc：用于加载不会改变的jar（eg.第三方依赖的jar）
+   rc：用于加载我们正在开发的jar（eg.整个项目里我们自己编写的类）。
+       当应用重启后，原先的rc被丢掉、重新new一个rc来加载这些修改过的东西，而bc却不需要动一下。这就是devtools重启速度快的原因
+⑧：缓存：
+   org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration
+   1.默认缓存：
+   org.springframework.boot.autoconfigure.cache.SimpleCacheConfiguration
+   spring-boot-starter-cache依赖加入,配置类开启缓存支持@EnableCaching
+    方法进行注解@EnableCache
+   2.切换其他缓存
+     配置EhCache：
+     org.springframework.boot.autoconfigure.cache.EhCacheCacheConfiguration
+     引入ehcache相关技术: 引入依赖net.sf.ehcache,配置文件ehcache.xml放类路径下
+     spring boot 自动配置EhCacheManager,使用的cache 名称在 ehcache.xml中进行定义
+     如果需要配置属性：application.properties ,spring.cache为前缀

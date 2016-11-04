@@ -13,4 +13,5 @@ import com.github.abel533.mapper.Mapper;
 public interface UserMapper extends Mapper<Users> {
 
 
+    Users findOne(Integer id);
 }

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec ="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8"/>
+    <title>webSocket 点对点 聊天页面</title>
+    <script th:src="@{/lib/sockjs.min.js}"></script>
+    <script th:src="@{/lib/stomp.min.js}"></script>
+    <script th:src="@{/jq/jquery-1.11.2.min.js}"></script>
+    <script th:inline="javascript">
+        var sock = new SockJS('/endPointChat');//链接endpoint 名称为/endPointChat
+        var stompClient = Stomp.over(sock);
+        stompClient.connect()
+        stompClient.connect('guest','guest',function(){
+            //订阅消息 多的/user 表示指定用户的接收
+
+           stompClient.subscribe('/user/queue/notifications',function(response){
+               alert(response);
+               $('#res').html(response.body);
+           });
+        });
+        function sendText(){
+            var text = $('#msg').val();
+            stompClient.send("/chat",{},text);
+        }
+    </script>
+</head>
+<body>
+<p>
+    聊天室
+</p>
+<form id="chatFrom">
+    <textarea rows="4" cols="6" name="text" id ="msg"></textarea>
+    <button onclick="sendText();"/>
+</form>
+<div id="output">
+   <b id="res"></b>
+</div>
+</body>
+</html>

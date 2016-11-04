@@ -1,4 +1,4 @@
-package com.example.study.taskExecutor;
+package com.example.study.conditional;
 
 import com.example.study.aware.AwareConfig;
 import com.example.study.aware.AwareDemoService;
@@ -9,15 +9,13 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  * Date: 2016/10/28  16:34
  * Description:
  */
-public class Main {
+public class Run {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context =
-                new AnnotationConfigApplicationContext(TaskExecutorConfig.class);
-        TaskService bean = context.getBean(TaskService.class);
-        for(int i =0;i<10;i++){
-            bean.excuteTask(i);
-            bean.excuteTaskPlus(i);
-        }
+                new AnnotationConfigApplicationContext(ConditionConfig.class);
+        ListService bean = context.getBean(ListService.class);
+        String s = bean.showListCmd();
+        System.out.println(s);
         context.close();
     }
 }

@@ -9,7 +9,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  * Date: 2016/10/28  16:34
  * Description:
  */
-public class Main {
+public class Run {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(AwareConfig.class);
