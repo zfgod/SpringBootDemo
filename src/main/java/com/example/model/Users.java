@@ -15,7 +15,7 @@ public class Users implements Serializable{
     private static final long serialVersionUID = 6598176455152763160L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "Name")
     private String name;
@@ -49,11 +49,11 @@ public class Users implements Serializable{
         this.age = age;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

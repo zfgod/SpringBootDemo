@@ -4,9 +4,11 @@ package com.example.common.config;
 import com.example.common.interceptors.LoginInterceptor;
 import com.example.common.interceptors.OtherInterceptor;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.util.PathMatcher;
+import org.springframework.web.servlet.config.annotation.*;
+
+import java.util.Comparator;
+import java.util.Map;
 
 /**
  * author: zf
@@ -41,4 +43,18 @@ public class MyWebAppConfigDefine extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/myRes/**").addResourceLocations("classpath:/myRes/");
         super.addResourceHandlers(registry);
     }
+
+    /**
+     * 访问路径后缀设置为 不忽略
+     * @param configurer
+     */
+    @Override
+    public void configurePathMatch(PathMatchConfigurer configurer) {
+        /*//设置不忽略后缀,使用后缀,设置为false后情况如下：
+        //@RequestMapping(value="/one/{id}")  路径只能是 contentPath/one/1 ，contentPath/one/1.xx 不行
+        //@RequestMapping(value="/one/{id}.do")   路径只能是 contentPath/one/1.do，其他都不行
+        configurer.setUseSuffixPatternMatch(false);*/
+        //使用默认配置的忽略点号后面内容 更可选
+    }
+
 }

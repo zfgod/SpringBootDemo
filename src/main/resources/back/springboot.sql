@@ -34,16 +34,17 @@ insert  into `student`(`Id`,`name`,`age`,`ScoreSum`,`ScoreAvg`) values (1,'a',45
 DROP TABLE IF EXISTS `user`;
 
 CREATE TABLE `user` (
-  `Id` int(11) NOT NULL DEFAULT '0',
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(40) DEFAULT NULL,
   `age` int(11) DEFAULT NULL,
   `qq` varchar(100) DEFAULT NULL,
-  `phone` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `phone` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 /*Data for the table `user` */
 
-insert  into `user`(`Id`,`name`,`age`,`qq`,`phone`) values (1,'a1',45,'1364','312'),(2,'a2',19,'1364','312'),(3,'a3',19,'1364','312');
+insert  into `user`(`Id`,`name`,`age`,`qq`,`phone`) values (1,'a1',45,'1364','312'),(2,'a2_update',29,'136234','31212'),(3,'a3_update',39,'136234','31212'),(4,'a4_1107',49,'13621134','3111212'),(5,'a5_1107',59,'13621134','53111212'),(6,'a6_1107',12,'13621134','3111212'),(7,'a7_aaaddda7',26,'13621134','3111212');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

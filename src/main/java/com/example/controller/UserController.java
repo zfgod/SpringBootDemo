@@ -1,6 +1,5 @@
 package com.example.controller;
 
-import com.example.mapper.UserMapper;
 import com.example.model.Users;
 import com.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -37,13 +35,17 @@ public class UserController {
     @RequestMapping(value="/one/{id}")
     public String getOne(@PathVariable("id") Integer id,Model model){
         Users users = userService.findOne(id);
-        model.addAttribute("user",users);
-        return "/user/detail";
+        if(users!=null){
+            model.addAttribute("user",users);
+            return "/user/detail";
+        }else {
+            return "404";
+        }
     }
 
     @RequestMapping(value="/save")
     public String saveOne(@RequestBody Users user){
-        int i = userService.saveOne(user);
+        userService.saveOne(user);
         return "redirect:/user/list";
     }
 
