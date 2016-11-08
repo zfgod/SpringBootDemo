@@ -28,15 +28,15 @@ public class CacheAspect {
 
        @Pointcut("@annotation(MyCacheEvict)")
        //声明切点
-       public void annotationPointCut(MyCacheEvict cacheEvict){
+       public void annotationPointCut(){
        }
 
 
        @Autowired
        CacheManager cacheManager;
 
-       @After("annotationPointCut(cacheEvict)")
-       public void after(JoinPoint joinpoint,MyCacheEvict cacheEvict){
+       @After("annotationPointCut()")
+       public void after(JoinPoint joinpoint){
            MethodSignature signature = (MethodSignature) joinpoint.getSignature();
            Method method = signature.getMethod();
            Parameter[] parameters = method.getParameters();
@@ -55,9 +55,12 @@ public class CacheAspect {
            System.out.println(element);
        }
 
-       @Before("annotationPointCut(cacheEvict)")
-       public void before(JoinPoint point,MyCacheEvict cacheEvict){
-
+       @Before("annotationPointCut()")
+       public void before(JoinPoint point){
+           MethodSignature signature = (MethodSignature) point.getSignature();
+           Method method = signature.getMethod();
+           Parameter[] parameters = method.getParameters();
+           MyCacheEvict cacheEvict = method.getAnnotation(MyCacheEvict.class);
            long startTime = System.currentTimeMillis();
            String targetName = point.getTarget().getClass().getName();
            String simpleName = point.getTarget().getClass().getSimpleName();
