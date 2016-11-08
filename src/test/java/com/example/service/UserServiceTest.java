@@ -2,6 +2,8 @@ package com.example.service;
 
 import com.example.DemoApplication;
 import com.example.model.Users;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.CacheManager;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,6 +29,9 @@ public class UserServiceTest {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    CacheManager cacheManager;
+
     @Before
     public void setUp(){
 
@@ -34,9 +39,10 @@ public class UserServiceTest {
 
     @Test
     public void testFindOne() throws Exception {
-
         Users one = userService.findOne(1);
         System.out.println(one);
+        Cache users = cacheManager.getCache("users");
+        System.out.println(users);
     }
 
     @Test

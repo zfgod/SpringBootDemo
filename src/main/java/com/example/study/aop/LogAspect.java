@@ -29,7 +29,7 @@ public class LogAspect {
            Method method = signature.getMethod();
            LogAction logAction = method.getAnnotation(LogAction.class);
            //反射得到注解上的属性，然后做日志记录
-           System.out.println("注解式拦截---"+logAction.name());//
+           System.out.println("注解式拦截---"+logAction.name()+"-"+logAction.key());//
        }
 
 

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DemoAnnotationService {
-    @LogAction(name = "DemoAnnotationService的add方法")
+    @LogAction(name = "DemoAnnotationService的add方法",key="d")
     public void add(){
 
     }

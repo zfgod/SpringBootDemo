@@ -1,7 +1,12 @@
 package com.example.service;
 
+import com.example.common.cacheCustomer.MyCacheEvict;
 import com.example.mapper.UserMapper;
 import com.example.model.Users;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.CacheManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -24,6 +29,20 @@ public class UserService {
     @Autowired
     private UserMapper userMapper;
 
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+    @Autowired
+    CacheManager cacheManager;
+
+    public String seeCache(){
+        Cache users = cacheManager.getCache("users");
+        List keys = users.getKeys();
+        System.out.println(keys);
+        logger.info("java.io.tmpdir="+System.getProperty("java.io.tmpdir"));
+        users.flush();
+        logger.info("缓存写入磁盘");
+        return keys.toString();
+    }
+
     @Cacheable(value = "users",key = "'user_'.concat(#id)")
 //   @Cacheable(value = "users",key = "'user_'+#id")
     //使用名称为users的cache,存入缓存的key为user_id(springEL获取入参)
@@ -44,8 +63,10 @@ public class UserService {
         return u;
     }
 
-
-    @CacheEvict(value = "users",key = "'user_'.concat(#user.getId())")
+    @CacheEvict(value = "users",key = "'user_'.concat(#user.id)")
+    @MyCacheEvict(value = "users",key ="'user_'.concat(#user.getId())", keys = {"#{user.id}", "list"},
+            keyRegex = "list")
+//    spel: #user.id  或者 #user.getId()
 //    更新的时候由于 更新的对象内容比 查询需要的字段会少很多,所以选择清除缓存,调用查询接口重新加入缓存
     public int updateOne(Users user){
         return userMapper.updateByPrimaryKeySelective(user);

@@ -13,4 +13,5 @@ import java.lang.annotation.*;
 @Documented
 public @interface LogAction {
     String name();
+    String key();
 }
