@@ -1,7 +1,5 @@
 package com.example.study.taskExecutor;
 
-import com.example.study.aware.AwareConfig;
-import com.example.study.aware.AwareDemoService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**

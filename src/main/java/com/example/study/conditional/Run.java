@@ -1,7 +1,5 @@
 package com.example.study.conditional;
 
-import com.example.study.aware.AwareConfig;
-import com.example.study.aware.AwareDemoService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**

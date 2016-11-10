@@ -22,6 +22,7 @@
                     document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
                 }
             }
+            //async=true,开启异步请求
             xmlhttp.open("GET","/async/test",true);
             xmlhttp.send();
         }
