@@ -9,18 +9,15 @@ import org.springframework.expression.spel.support.StandardEvaluationContext;
 /**
  * author: zf
  * Date: 2016/11/8  18:57
- * Description:
+ * Description: spring expression language parser
  */
 public class SpelParser {
     private static ExpressionParser parser = new SpelExpressionParser();
-    //  private static Logger log = Logger.getLogger(SpelParser.class);
-    // String key = "'Book.'+#bookId";
-    // int bookId = 100;
-    public static String getKey(String key, String condition,String[] paramNames, Object[] arguments) {
+    public static String getKey(String key,String[] paramNames, Object[] arguments) {
         try {
-            if (!checkCondition(condition, paramNames, arguments)){
-                return null;
-            }
+//            if (!checkCondition(condition, paramNames, arguments)){
+//                return null;
+//            }
             Expression expression = parser.parseExpression(key);
             EvaluationContext context = new StandardEvaluationContext();
             int length = paramNames.length;
@@ -51,12 +48,4 @@ public class SpelParser {
         return expression.getValue(context, boolean.class);
     }
 
-//  public static void main(String[] args) {
-//      String key="'getAudioListByBIdNo.'+#bIdNo";
-//      try {
-//          System.out.println(getKey(key, "", new String[]{"bIdNo"}, new Object[]{"B19001084"}));
-//      } catch (UnsupportedEncodingException e) {
-//          e.printStackTrace();
-//      }
-//  }
 }

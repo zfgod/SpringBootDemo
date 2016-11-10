@@ -5,7 +5,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * author: zf
  * Date: 2016/11/8  18:51
- * Description:
+ * Description: 参数map封装
  */
 public class ParameterMap {
     private static ConcurrentHashMap<String, String[]> map = new ConcurrentHashMap<String, String[]>();

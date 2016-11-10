@@ -1,7 +1,5 @@
 package com.example.common.cacheCustomer;
 
-import org.springframework.stereotype.Component;
-
 import java.lang.annotation.*;
 
 /**
@@ -23,11 +21,4 @@ public @interface MyCacheEvict {
     String[] keys() default {};//key数组
     String keyRegex() default "";//key 模糊匹配
     boolean allEntries() default false;//是否清除此cache下所有缓存
-
-//
-    int second() default 60*60; //秒
-    String condition() default ""; //参数条件
-    boolean reLoad() default false; //重新载入缓存
-    String desc() default ""; //key 的描述
-    String method() default "";//重新载入缓存时调用的方法名
 }

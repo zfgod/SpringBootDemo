@@ -56,6 +56,7 @@ public class UserService {
 //    @CacheEvict(value = "users",key = "")
     //存入或者更新 users缓存中 key为user_id 的缓存
     //当存入成功，直接把此用户缓存到users中 key= user拼接上id
+    @MyCacheEvict(value = "users", keyRegex = "list")
     public Users saveOne(Users u){
 //    方法的返回值 作为缓存的value存储,所以需要返回user对象并带有id值
         u.setId(null);
@@ -63,11 +64,11 @@ public class UserService {
         return u;
     }
 
-    @CacheEvict(value = "users",key = "'user_'.concat(#user.id)")
-    @MyCacheEvict(value = "users",key ="'user_'.concat(#user.getId())", keys = {"#{user.id}", "list"},
+//    @CacheEvict(value = "users",key = "'user_'.concat(#user.id)")
+    @MyCacheEvict(value = "users", keys = {"'user_'.concat(#user.id)"},
             keyRegex = "list")
-//    spel: #user.id  或者 #user.getId()
-//    更新的时候由于 更新的对象内容比 查询需要的字段会少很多,所以选择清除缓存,调用查询接口重新加入缓存
+//  spel: #user.id  或者 #user.getId()
+//  更新的时候由于 更新的对象内容比 查询需要的字段会少很多,所以选择清除缓存,调用查询接口重新加入缓存
     public int updateOne(Users user){
         return userMapper.updateByPrimaryKeySelective(user);
     }

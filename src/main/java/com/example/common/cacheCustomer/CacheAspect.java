@@ -1,9 +1,6 @@
 package com.example.common.cacheCustomer;
 
-import com.example.study.aop.LogAction;
-import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
-import net.sf.ehcache.Element;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -11,12 +8,12 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.expression.Expression;
-import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.stereotype.Component;
-
+import org.apache.commons.lang3.StringUtils;
 import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * author: zf
@@ -30,70 +27,71 @@ public class CacheAspect {
        //声明切点
        public void annotationPointCut(){
        }
-
-
        @Autowired
        CacheManager cacheManager;
 
        @After("annotationPointCut()")
-       public void after(JoinPoint joinpoint){
-           MethodSignature signature = (MethodSignature) joinpoint.getSignature();
-           Method method = signature.getMethod();
-           Parameter[] parameters = method.getParameters();
-           MyCacheEvict myCacheEvict = method.getAnnotation(MyCacheEvict.class);
-           //反射得到注解上的属性
-           String value = myCacheEvict.value();
-           String key = myCacheEvict.key();
-           SpelExpressionParser spelParser = new SpelExpressionParser();
-           Expression expression = spelParser.parseExpression(key);
-           String regex = myCacheEvict.keyRegex();
-           String[] keys = myCacheEvict.keys();
-           boolean allEntries = myCacheEvict.allEntries();
-           System.out.println("注解式缓存策略---"+value+"-"+key);//
-           Cache cache = cacheManager.getCache(value);
-           Element element = cache.get(key);
-           System.out.println(element);
-       }
-
-       @Before("annotationPointCut()")
-       public void before(JoinPoint point){
+       public void after(JoinPoint point){
            MethodSignature signature = (MethodSignature) point.getSignature();
            Method method = signature.getMethod();
-           Parameter[] parameters = method.getParameters();
-           MyCacheEvict cacheEvict = method.getAnnotation(MyCacheEvict.class);
-           long startTime = System.currentTimeMillis();
-           String targetName = point.getTarget().getClass().getName();
-           String simpleName = point.getTarget().getClass().getSimpleName();
-           String methodName = point.getSignature().getName();
-           Object[] arguments = point.getArgs();
-           //重新加载 要更新的缓存方法名
-           if(cacheEvict.reLoad()){
-               methodName = cacheEvict.method();
+           MyCacheEvict cacheEvict = method.getAnnotation(MyCacheEvict.class);//获取注解
+           String targetName  = point.getTarget().getClass().getName();
+//           String simpleName  = point.getTarget().getClass().getSimpleName();
+           String methodName  = point.getSignature().getName();
+           Object[] arguments = point.getArgs();//获取方法入参
+           String[] paramNames = ReflectParamNames.getNames(targetName, methodName);//反射得到形参名称
+           //反射得到注解上的属性,这里只处理 keys和 regex 两种策略
+           String value = cacheEvict.value();//缓存名称
+// 多个key的清除
+           String[] keys = cacheEvict.keys();
+           List<String> list = new ArrayList<>();
+           if(keys!=null && keys.length>0){
+               for (String key : keys) {
+                   list.add(getSpelString(key,arguments,paramNames)) ;
+               }
+               //调用缓存策略工具,实现缓存清除
+               CacheUtils.removeKeys(list,value,cacheManager);
            }
 
-           String key = null;
-//        没传key
-           if (cacheEvict.key().length() > 0) {
-               key = "'"+simpleName+"."+methodName + ".'+" +  cacheEvict.key();
-           }else{
-               key = simpleName+"."+methodName;
-           }
-
-           String[] paramNames = ParameterMap.get(key);
-           if (paramNames==null){
-//          反射得到形参名称
-               paramNames = ReflectParamNames.getNames(targetName, methodName);
-               ParameterMap.put(key, paramNames);
-           }
-
-           if(cacheEvict.key().length() > 0){
-//          spring EL 表达式
-               key = SpelParser.getKey(key, cacheEvict.condition(), paramNames, arguments);
-           }
-
-           if(key.length()>200){
-//          logger.warn("+++cache key length over max 200!");
+//匹配式key的清除
+           String regex = cacheEvict.keyRegex();
+           if(StringUtils.isNotBlank(regex)){
+               CacheUtils.removeKeysWithRegex(regex, value,cacheManager);
            }
        }
+//       @Before("annotationPointCut()")
+//       public void before(JoinPoint point){
+//           MethodSignature signature = (MethodSignature) point.getSignature();
+//           Method method = signature.getMethod();
+//           MyCacheEvict cacheEvict = method.getAnnotation(MyCacheEvict.class);
+//           String targetName  = point.getTarget().getClass().getName();
+////           String simpleName  = point.getTarget().getClass().getSimpleName();
+//           String methodName  = point.getSignature().getName();
+//           Object[] arguments = point.getArgs();
+//           String[] paramNames = ReflectParamNames.getNames(targetName, methodName);
+//           String keys = cacheEvict.key();
+//           String key = getSpelString(keys,arguments,paramNames);
+//           System.out.println(key);
+//       }
+//  通过springEL获取真实值
+    private String getSpelString(
+            String key, Object[] arguments,String[] paramNames) {
+//        String key;
+//        if (keys.length() > 0) {
+//            key = "'"+simpleName+"."+methodName + ".'+" +  keys;
+//        }else{//没传key
+//            key = simpleName+"."+methodName;
+//        }
+        String[] thisParamNames = ParameterMap.get(key);
+        if (thisParamNames == null){
+            thisParamNames = paramNames;
+            ParameterMap.put(key, thisParamNames);
+        }
+        if(key.length() > 0){
+            //spring EL 表达式
+            key = SpelParser.getKey(key, thisParamNames, arguments);
+        }
+        return key;
+    }
 
 }
