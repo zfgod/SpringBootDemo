@@ -1,0 +1,12 @@
+ org.springframework.boot.autoconfigure.security.SpringBootWebSecurityConfiguration
+ 默认属性注入：
+    org.springframework.boot.autoconfigure.security.SecurityProperties
+    系统初始用户：User: name="user",password = UUID.randomUUID().toString(),
+    默认忽略拦截路径：DEFAULT_IGNORED = Arrays.asList("/css/**", "/js/**",
+    			"/images/**", "/webjars/**", "/**/favicon.ico");
+
+修改属性配置:Properties文件中，security为前缀
+
+
+扩展配置：
+   配置类继承WebSecurityConfigurerAdapter,无需@EnableWebSecurity

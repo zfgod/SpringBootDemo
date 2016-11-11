@@ -1,0 +1,30 @@
+读取并处理CVS文件
+
+Spring Batch 的内置 reader, org.springframework.batch.item.file.FlatFileItemReader,用来将文件解析为多个独立的行。
+  需要纯文本文件的引用,文件开头要忽略的行数(比如标题,表头等信息),
+  以及将单行转换为对象的 line mapper.
+  行映射器需要一个分割字符串的分词器(line tokenizer),用来将一行拆分成多个组成字段,
+  还需要一个 field set mapper ,根据字段值构建对象。
+  FlatFileItemReader 的配置如下所示:
+  <bean id="productReader" class="org.springframework.batch.item.file.FlatFileItemReader" scope="step">
+
+      <!-- <property name="resource" value="file:./sample.csv" /> -->
+      <property name="resource" value="file:#{jobParameters['inputFile']}" />
+
+      <property name="linesToSkip" value="1" />
+
+      <property name="lineMapper">
+          <bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+
+              <property name="lineTokenizer">
+                  <bean class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer">
+                      <property name="names" value="id,name,description,quantity" />
+                  </bean>
+              </property>
+
+              <property name="fieldSetMapper">
+                  <bean class="com.geekcap.javaworld.springbatchexample.simple.reader.ProductFieldSetMapper" />
+              </property>
+          </bean>
+      </property>
+  </bean>

@@ -7,8 +7,8 @@ SpringBoot:
     profile配置
     springCache,EhCache
     开发热部署及开发测试
-前端：a. 使用thymeleaf模板（th 标签操作数据）
-     b. 使用静态页面+json数据交互模式（js框架可以任选框架）
+前端：a. 使用thymeleaf模板（th 标签操作数据） springBoot推荐
+     b. 使用静态页面+json数据交互模式（js框架可以任选框架） 适合前后端分离的开发模式
 其他：
    异步请求 controller形式
    Condition 注解 条件注入bean

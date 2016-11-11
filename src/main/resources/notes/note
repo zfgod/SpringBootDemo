@@ -31,7 +31,7 @@ SpringBoot:
     spring.thymeleaf.cache=false 开发时关闭缓存
 
 ⑦：开发热部署：
-a. 类文件热部署
+a. 类文件热部署z
     下载  springloaded-1.2.5.RELEASE.jar
     -javaagent:C:\javainstalls\jar\springloaded-1.2.5.RELEASE.jar -noverify
     修改启动配置 VM参数
@@ -59,3 +59,10 @@ d. 添加spring-boot-devtools依赖 ： 代码热部署支持
      引入ehcache相关技术: 引入依赖net.sf.ehcache,配置文件ehcache.xml放类路径下
      spring boot 自动配置EhCacheManager,使用的cache 名称在 ehcache.xml中进行定义
      如果需要配置属性：application.properties ,spring.cache为前缀
+⑨:security
+    org.springframework.boot.autoconfigure.security.SpringBootWebSecurityConfiguration
+    属性注入：
+    org.springframework.boot.autoconfigure.security.SecurityProperties
+    系统初始用户：User: name="user",password = UUID.randomUUID().toString(),
+    默认忽略拦截路径：DEFAULT_IGNORED = Arrays.asList("/css/**", "/js/**",
+    			"/images/**", "/webjars/**", "/**/favicon.ico");
