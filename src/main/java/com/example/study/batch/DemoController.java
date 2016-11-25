@@ -35,9 +35,23 @@ public class DemoController {
     public JobParameters jobParameters;
 
 
+    /**
+     *
+     * @param fileName
+     * @return
+     * @throws Exception
+     */
 
     @RequestMapping("/imp")
     public String imp(@RequestParam("fileName")String fileName) throws Exception{
+         /**
+          * @Description:
+          * @author: zf
+          * @Param: [fileName]
+          * @Return: java.lang.String
+          * @Date:   2016/11/16
+          */
+
         String path = fileName+".csv";
         jobParameters = new JobParametersBuilder()
                 .addLong("time",System.currentTimeMillis())
