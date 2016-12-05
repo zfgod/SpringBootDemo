@@ -10,7 +10,7 @@
     </springProfile>
     <!-- 生成环境变量product-->
     <springProfile name="pro">
-        <property name="LOG_HOME" value="E:/SpringBootProLog" />
+        <property name="LOG_HOME" value="/usr/els/springboottest/logs" />
     </springProfile>
     <!-- 控制台输出 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">

@@ -17,7 +17,7 @@ public class asyncDemoController {
 
     @RequestMapping(value = "/async")
     public String goH51(){
-        return "/stu/async";
+        return "stu/async";
     }
 
 

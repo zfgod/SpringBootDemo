@@ -19,6 +19,6 @@ public class ThymeleafController {
     public String helloFtl(Map<String,Object> map){
         map.put("hello","first thymeleaf");
         map.put("sessionTime",sessionTime);
-        return"/hello";
+        return"hello";
     }
 }

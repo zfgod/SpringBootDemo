@@ -24,9 +24,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 
 /**
  * author: zf
@@ -43,10 +48,19 @@ public class TriggerBatchConfig {
      */
     @Bean
     @StepScope
-    public FlatFileItemReader<People> reader(@Value("#{jobParameters['input.file.name']}") String pathToFile) throws Exception{
+    public FlatFileItemReader<People> reader(
+            @Value("#{jobParameters['input.file.path']}") String pathToFile,
+            @Value("#{jobParameters['path.type']}") Long type)
+            throws Exception{
         FlatFileItemReader<People> reader = new FlatFileItemReader<>();//使用FlatFileItemReader读取文件
-        reader.setResource(new ClassPathResource(pathToFile));//设置文件路径
-//        reader.setResource(new ClassPathResource("/back/people2.csv"));//设置文件路径
+        if(type.equals(1L)){
+            reader.setResource(new ClassPathResource(pathToFile));//设置文件路径
+        }else if(type.equals(2L)){
+            File file = new File(pathToFile);
+            InputStream i = new FileInputStream(file);
+            InputStreamResource inputStreamResource = new InputStreamResource( i);
+            reader.setResource(inputStreamResource);
+        }
         reader.setEncoding("GBK");
         reader.setLineMapper(new DefaultLineMapper<People>() {{//对文件的数据与people模型做对应映射
             setLineTokenizer(new DelimitedLineTokenizer() {{

@@ -37,7 +37,7 @@ public class UserController {
         List<Users> users = userService.getUserList();
         model.addAttribute("users",users);
         model.addAttribute("single",users.get(0));
-        return "/user/main";
+        return "user/main";
     }
 
     @RequestMapping(value="/one/{id}")
@@ -45,7 +45,8 @@ public class UserController {
         Users users = userService.findOne(id);
         if(users!=null){
             model.addAttribute("user",users);
-            return "/user/detail";
+            return "user/detail";
+
         }else {
             return "404";
         }

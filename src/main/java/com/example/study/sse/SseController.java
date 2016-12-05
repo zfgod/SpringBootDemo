@@ -16,12 +16,12 @@ public class SseController {
     @RequestMapping(value = "/goPush1")
     public String goH51(){
 
-        return "/stu/push";
+        return "stu/push";
     }
 
     @RequestMapping(value = "/goPush2")
     public String goH52(){
-        return "/stu/pushTest";
+        return "stu/pushTest";
     }
     @RequestMapping(value = "/push",produces = "text/event-stream")
     public @ResponseBody String push(){

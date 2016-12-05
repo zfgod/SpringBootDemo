@@ -17,7 +17,7 @@ SpringBoot:
    mapper 映射文件和 别名typeAliases配置在 application.properties 中
    关于通用mapper和pageHelper分页助手, 简单业务写写也不费事，复杂业务都用不上或者最好不要用
    so: 系统还是不要杂七杂八搞太多形式，mybatis采用xml配置更合适，弃用通用mapper和pageHelper,sql都写在映射文件最统一，便于维护
-   打印日志
+   开发时打印日志作问题分析
 
 ④：系统业务参数配置
    增加应用配置文件

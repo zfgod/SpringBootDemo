@@ -1,6 +1,7 @@
 package com.example.model;
 
 import javax.persistence.*;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
