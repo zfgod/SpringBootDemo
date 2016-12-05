@@ -7,6 +7,7 @@
     <artifactId>springBootDemo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
+    <!--<packaging>war</packaging>-->
 
     <name>springBootDemo</name>
     <description>Demo project for Spring Boot</description>
@@ -93,10 +94,10 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.thymeleaf.extras</groupId>
-            <artifactId>thymeleaf-extras-springsecurity4</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.thymeleaf.extras</groupId>-->
+            <!--<artifactId>thymeleaf-extras-springsecurity4</artifactId>-->
+        <!--</dependency>-->
         <!-- 引入Web模块 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -131,7 +132,7 @@
             </exclusions>
         </dependency>
 
-        <!-- HikariCP 链接池，优于BoneCp,DBCP,c3p0-->
+        <!-- HikariCP 链接池-->
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
@@ -192,19 +193,13 @@
             <artifactId>persistence-api</artifactId>
             <version>1.0.2</version>
         </dependency>
-        <!-- hibernate-validator 里面包含hibernate-jpa-2.1-api,多版本会出问题-->
-        <!--<dependency>-->
-            <!--<groupId>org.hibernate.javax.persistence</groupId>-->
-            <!--<artifactId>hibernate-jpa-2.0-api</artifactId>-->
-            <!--<version>1.0.1.Final</version>-->
-        <!--</dependency>-->
+
         <!-- 模板热部署-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency>
-
 
         <!-- 测试模块-->
         <dependency>
@@ -217,6 +212,25 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.4</version>
         </dependency>
+
+        <!-- jms之activeMQ-->
+        <!-- 嵌入程序-->
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-broker</artifactId>
+            <!--<version>5.7.0</version>-->
+        </dependency>
+        <!--spring-jms -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jms</artifactId>
+        </dependency>
+        <!-- client-->
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-client</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

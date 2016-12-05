@@ -1,0 +1,12 @@
+jms自动配置类：
+  org.springframework.boot.autoconfigure.jms.activemq.ActiveMQAutoConfiguration
+  默认参数：
+  org.springframework.boot.autoconfigure.jms.activemq.ActiveMQProperties
+
+ActiveMQ:jms的一个实现
+   依赖添加。。
+   配置：application.properties, spring.activemq.*
+  消息定义：发送消息实现：
+   com.example.study.jms.Msg
+  消息发送及目的地定义
+

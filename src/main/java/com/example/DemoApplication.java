@@ -1,13 +1,16 @@
 package com.example;
 
 import com.example.model.CustomerParam;
+import com.example.study.jms.Msg;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,13 +24,17 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @MapperScan("com.example.mapper")//mybatis mapper接口扫描
 @EnableTransactionManagement // 启注解事务管理，等同于xml配置方式的 <tx:annotation-driven />
 @SpringBootApplication //项目核心注解，开启自动配置.
-public class DemoApplication {
+public class DemoApplication implements CommandLineRunner{
 //  Spring EL 注入properties文件参数
 	@Value("${project.name}")
 	private String projectName;
 
 	@Autowired
 	private CustomerParam customerParam;
+
+	@Autowired
+	JmsTemplate jmsTemplate;
+
     //项目启动入口
 	@RequestMapping("/")
 	String home(){
@@ -38,5 +45,10 @@ public class DemoApplication {
 	public static void main(String[] args) {
 
 		SpringApplication.run(DemoApplication.class, args);
+	}
+
+	@Override
+	public void run(String... args) throws Exception {
+		jmsTemplate.send("test-destination",new Msg());
 	}
 }
