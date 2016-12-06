@@ -14,7 +14,7 @@ import javax.jms.Session;
 public class Msg implements MessageCreator {
     @Override
     public Message createMessage(Session session) throws JMSException {
-
         return session.createTextMessage("测试消息内容发送！");
     }
+
 }

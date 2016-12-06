@@ -24,7 +24,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @MapperScan("com.example.mapper")//mybatis mapper接口扫描
 @EnableTransactionManagement // 启注解事务管理，等同于xml配置方式的 <tx:annotation-driven />
 @SpringBootApplication //项目核心注解，开启自动配置.
-public class DemoApplication implements CommandLineRunner{
+public class DemoApplication {
 //  Spring EL 注入properties文件参数
 	@Value("${project.name}")
 	private String projectName;
@@ -47,8 +47,4 @@ public class DemoApplication implements CommandLineRunner{
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
-	@Override
-	public void run(String... args) throws Exception {
-		jmsTemplate.send("test-destination",new Msg());
-	}
 }
