@@ -26,5 +26,5 @@
     2. 方法规则式：aspect切面,配置匹配规则execution
    + cache:自定义缓存注解，SpEl解析属性，aspect切面引入cache策略
    + activeMQ
-       jmsMessagingTemplate 发送queue、topic消息
-       @JmsListener 异步接收 queue/topic 消息（监听队列模式2选1）
+     1.  jmsMessagingTemplate 发送queue、topic消息
+     2.  @JmsListener 异步接收 queue/topic 消息（监听队列模式2选1）
