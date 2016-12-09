@@ -22,8 +22,8 @@
    + AsyncConfigurer 异步任务
    + webSocket 广播式通信
    + aop：注解式和方法规则式
-       注解式：自定义注解（名称和属性），aspect切面
-       方法规则式：aspect切面,配置匹配规则execution
+       > 注解式：自定义注解（名称和属性），aspect切面
+       > 方法规则式：aspect切面,配置匹配规则execution
    + cache:自定义缓存注解，SpEl解析属性，aspect切面引入cache策略
    + activeMQ
        jmsMessagingTemplate 发送queue、topic消息
