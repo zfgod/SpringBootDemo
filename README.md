@@ -3,7 +3,7 @@
   springBoot 微服务框架学习实例,参考书籍《JavaEE的颠覆者Spring Boot》汪云飞
 
 ## 后台系统框架：SpringMVC+SpringBoot+Mybatis
-    +SpringBoot集成mvc,mybatis,
+    + SpringBoot集成mvc,mybatis,
     +java配置+properties文件注入配置参数,静态文件处理
     +类型安全的配置（基于properties)
     +日志locback
