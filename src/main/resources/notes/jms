@@ -7,6 +7,9 @@ ActiveMQ:jms的一个实现
    依赖添加。。
    配置：application.properties, spring.activemq.*
   消息定义：发送消息实现：
-   com.example.study.jms.Msg
-  消息发送及目的地定义
+    com.example.study.jms.Msg
+  消息发送及目的地定义:可以指定queue/topic 两种类型的消息发送
 
+spring boot的jms配置是queue的方式，如果我们需要进行指定为topic的方式====  2 选 1
+    配置消息模型为pub/sub方式，在application.properties添加如下配置信息：
+#spring.jms.pub-sub-domain: false for queue(default) , true for topic

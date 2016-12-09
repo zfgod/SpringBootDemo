@@ -10,14 +10,22 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class MsgReceiver {
+//开启spring.jms.pub-sub-domain=true,系统监听的地址都在 topic模式下
+//springBoot 默认spring.jms.pub-sub-domain=false,系统监听的地址都在 queue模式下。
+//  监听类型只能2选1
     @JmsListener(destination = "test.queue")
     public void receiveMessage(String msg){
 
-        System.out.println("接收queue消息："+msg);
+        System.out.println("接收消息："+msg);
     }
 
+    /**
+     *
+     * @param msg
+     */
     @JmsListener(destination = "test.topic")
-    public void receiveTopicMessage(String msg){
-        System.out.println("接收topic消息："+msg);
+    public void receiveTopicMessage(String msg)
+    {
+        System.out.println("接收消息："+msg);
     }
 }

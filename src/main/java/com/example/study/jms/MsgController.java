@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class MsgController {
     @Autowired
     MsgSend msgSend;
+
     /**
      * 发送消息到队列
      * Queue队列：仅有一个订阅者会收到消息，消息一旦被处理就不会存在队列中
@@ -27,9 +28,10 @@ public class MsgController {
     public String queueSender(@RequestParam("message")String message){
         String opt="";
         try {
-            msgSend.send("test.queue", message);
+            msgSend.sendToQueue("test.queue", message);
             opt = "suc";
         } catch (Exception e) {
+
             opt = e.getCause().toString();
         }
         return opt;
@@ -47,7 +49,7 @@ public class MsgController {
     public String topicSender(@RequestParam("message")String message){
         String opt = "";
         try {
-            msgSend.send("test.topic", message);
+            msgSend.sendToTopic("test.topic", message);
             opt = "suc";
         } catch (Exception e) {
             opt = e.getCause().toString();
