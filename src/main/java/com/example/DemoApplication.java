@@ -8,7 +8,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.jms.core.JmsTemplate;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,9 +27,6 @@ public class DemoApplication {
 
 	@Autowired
 	private CustomerParam customerParam;
-
-	@Autowired
-	JmsTemplate jmsTemplate;
 
     //项目启动入口
 	@RequestMapping("/")

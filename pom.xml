@@ -214,26 +214,11 @@
         </dependency>
 
         <!-- jms之activeMQ-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-activemq</artifactId>
-        </dependency>
-        <!-- 嵌入程序-->
         <!--<dependency>-->
-            <!--<groupId>org.apache.activemq</groupId>-->
-            <!--<artifactId>activemq-broker</artifactId>-->
-            <!--&lt;!&ndash;<version>5.7.0</version>&ndash;&gt;-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-activemq</artifactId>-->
         <!--</dependency>-->
-        <!--&lt;!&ndash;spring-jms &ndash;&gt;-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-jms</artifactId>-->
-        <!--</dependency>-->
-        <!--&lt;!&ndash; client&ndash;&gt;-->
-        <!--<dependency>-->
-            <!--<groupId>org.apache.activemq</groupId>-->
-            <!--<artifactId>activemq-client</artifactId>-->
-        <!--</dependency>-->
+
 
     </dependencies>
 

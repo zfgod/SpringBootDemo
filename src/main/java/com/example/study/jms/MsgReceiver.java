@@ -1,3 +1,4 @@
+/*
 package com.example.study.jms;
 
 import org.springframework.jms.annotation.JmsListener;
@@ -11,11 +12,13 @@ import javax.jms.ObjectMessage;
 import java.io.Serializable;
 import java.util.Enumeration;
 
+*/
 /**
  * author: zf
  * Date: 2016/12/5  19:09
  * Description:
- */
+ *//*
+
 @Component
 public class MsgReceiver {
 //开启spring.jms.pub-sub-domain=true,系统监听的地址都在 topic模式下
@@ -27,10 +30,12 @@ public class MsgReceiver {
         System.out.println("接收消息："+msg);
     }
 
-    /**
+    */
+/**
      *
      * @param msg
-     */
+     *//*
+
     @JmsListener(destination = "test.topic")
     public void receiveTopicMessage(String msg)
     {
@@ -75,3 +80,4 @@ public class MsgReceiver {
         }
     }
 }
+*/
