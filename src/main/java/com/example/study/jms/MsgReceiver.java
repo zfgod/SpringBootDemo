@@ -2,6 +2,14 @@ package com.example.study.jms;
 
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
+import sys.model.AmqObject;
+
+import javax.jms.JMSException;
+import javax.jms.MapMessage;
+import javax.jms.Message;
+import javax.jms.ObjectMessage;
+import java.io.Serializable;
+import java.util.Enumeration;
 
 /**
  * author: zf
@@ -26,6 +34,44 @@ public class MsgReceiver {
     @JmsListener(destination = "test.topic")
     public void receiveTopicMessage(String msg)
     {
+
         System.out.println("接收消息："+msg);
+    }
+
+
+    @JmsListener(destination = "topic.msg.object2",concurrency = "1")
+    public void receiveObject(Message message) throws JMSException {
+       try {
+           if(message instanceof ObjectMessage){
+               Serializable serializable = ((ObjectMessage) message).getObject();
+               System.out.println(serializable.toString());
+               AmqObject object = (AmqObject) serializable;
+               System.out.println(object.toString());
+           }else {
+               System.out.println(message.toString());
+           }
+       } catch (Exception e){
+         e.printStackTrace();
+       }
+    }
+
+    @JmsListener(destination = "topic.msg.map",concurrency = "1")
+    public void receiveMap(Message message) throws JMSException {
+        try {
+            if(message instanceof MapMessage){
+                MapMessage mapMessage = (MapMessage) message;
+                Enumeration mapNames = mapMessage.getMapNames();
+                while (mapNames.hasMoreElements()){
+                    String s = mapNames.nextElement().toString();
+                    System.out.println(s);
+                    Object object = mapMessage.getObject(s);
+                    Object objectProperty = mapMessage.getObjectProperty(s);
+                }
+            }else {
+                System.out.println(message.toString());
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

@@ -4,7 +4,15 @@ import org.apache.activemq.command.ActiveMQQueue;
 import org.apache.activemq.command.ActiveMQTopic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsMessagingTemplate;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Component;
+import sys.model.AmqObject;
+
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.ObjectMessage;
+import javax.jms.Session;
 
 /**
  * author: zf
@@ -25,6 +33,8 @@ public class MsgSend {
     @Autowired
     JmsMessagingTemplate jmsMessagingTemplate;
 
+    @Autowired
+    private JmsTemplate jmsTemplate;
     /**
      * 向指定的点对点队列发送消息
      * @param queueName 队列名称
@@ -35,6 +45,17 @@ public class MsgSend {
         jmsMessagingTemplate.convertAndSend(activeMQQueue,message);
     }
 
+    public void sendObjectToQueue(String queueName,AmqObject message){
+        ActiveMQQueue activeMQQueue = new ActiveMQQueue(queueName);//继承了父类Destination
+        jmsTemplate.send(activeMQQueue, new MessageCreator() {
+            @Override
+            public Message createMessage(Session session) throws JMSException {
+                return session.createObjectMessage(message);
+            }
+        });
+    }
+
+
     /**
      * 向指定的主题队列发送消息
      * @param queueName  队列名称
@@ -43,6 +64,19 @@ public class MsgSend {
     public void sendToTopic(String queueName,final String message){
         ActiveMQTopic activeMQTopic = new ActiveMQTopic(queueName);//继承了父类Destination
         jmsMessagingTemplate.convertAndSend(activeMQTopic,message);
+    }
+
+    public void sendObjectToTopic(String queueName,AmqObject message){
+        jmsTemplate.send(new ActiveMQTopic(queueName), new MessageCreator() {
+            @Override
+            public Message createMessage(Session session) throws JMSException {
+                ObjectMessage objectMessage = session.createObjectMessage(message);
+                objectMessage.setObject(message);
+                String s = objectMessage.toString();
+                System.out.println(s);
+                return  objectMessage;
+            }
+        });
     }
 
 }

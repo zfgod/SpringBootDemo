@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import sys.model.AmqObject;
 
 /**
  * author: zf
@@ -37,6 +38,23 @@ public class MsgController {
         return opt;
     }
 
+    @ResponseBody
+    @RequestMapping("/queueObjectSender")
+    public String queueObjectSender(@RequestParam("name")String name,
+                                    @RequestParam("message")String message){
+        String opt="";
+        try {
+            AmqObject o = new AmqObject();
+            o.setName(name);
+            o.setMsg(message);
+            msgSend.sendObjectToQueue(name,o);
+            opt = "suc";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return opt;
+    }
+
     /**
      * 发送消息到主题
      * Topic主题 ：放入一个消息，所有订阅者都会收到
@@ -56,4 +74,22 @@ public class MsgController {
         }
         return opt;
     }
+
+    @ResponseBody
+    @RequestMapping("/topicObjectSender")
+    public String topicObjectSender(@RequestParam("name")String name,
+                                    @RequestParam("message")String message){
+        String opt="";
+        try {
+            AmqObject o = new AmqObject();
+            o.setName(name);
+            o.setMsg(message);
+            msgSend.sendObjectToTopic(name,o);
+            opt = "suc";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return opt;
+    }
+
 }
