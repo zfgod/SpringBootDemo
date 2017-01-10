@@ -24,15 +24,12 @@ public class DemoApplication {
 //  Spring EL 注入properties文件参数
 	@Value("${project.name}")
 	private String projectName;
-
 	@Autowired
 	private CustomerParam customerParam;
-
     //项目启动入口
 	@RequestMapping("/")
 	String home(){
-
-		return "hello SpringBoot...-"+projectName+" i am "+customerParam.getName();
+		return "hello SpringBoot...-"+projectName+"--"+customerParam.toString();
 	}
 
 	public static void main(String[] args) {

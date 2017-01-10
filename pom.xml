@@ -187,6 +187,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
+            <!--5.2.4.Final-->
         </dependency>
         <dependency>
             <groupId>javax.persistence</groupId>

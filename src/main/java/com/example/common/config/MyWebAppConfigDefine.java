@@ -4,11 +4,8 @@ package com.example.common.config;
 import com.example.common.interceptors.LoginInterceptor;
 import com.example.common.interceptors.OtherInterceptor;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.util.PathMatcher;
 import org.springframework.web.servlet.config.annotation.*;
 
-import java.util.Comparator;
-import java.util.Map;
 
 /**
  * author: zf

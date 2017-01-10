@@ -38,7 +38,7 @@
     <!-- 日志输出级别 pro生成,dev开发 -->
     <!-- pro-->
     <root level="INFO">
-        <appender-ref ref="STDOUT"/>
+        <!--<appender-ref ref="STDOUT"/>-->
         <appender-ref ref="FILE" />
     </root>
     <!-- dev 不建议使用debug。日志实在太多-->

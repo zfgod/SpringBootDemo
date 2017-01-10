@@ -4,7 +4,6 @@ SpringBoot:
 ①：注解
    @RestController 包含了@Controller,@ResponseBody  所以方法上面无需指定，返回的是json格式数据
 
-
 ②：静态资源访问
    路径：
    /** 默认访问根目录下的static

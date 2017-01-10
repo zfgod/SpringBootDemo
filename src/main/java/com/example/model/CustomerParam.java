@@ -9,7 +9,11 @@ import org.springframework.stereotype.Component;
  * Description: 读取自定义文件 customer.properties，类型安全配置参数
  */
 @Component
-@ConfigurationProperties(prefix = "customer",locations = {"classpath:config/customer.properties"})
+@ConfigurationProperties(prefix = "customer",
+        locations = {"classpath:config/customer.properties"},
+        ignoreInvalidFields = true,
+        ignoreNestedProperties = false
+)
 public class CustomerParam {
     private Integer age;
     private String  name;
