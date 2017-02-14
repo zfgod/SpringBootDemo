@@ -6,7 +6,7 @@
    + SpringBoot集成mvc,mybatis,
    + java配置+properties文件注入配置参数,静态文件处理
    + 类型安全的配置（基于properties)
-   + 日志locback
+   + 日志logback
    + profile配置
    + springCache,EhCache
    + 开发热部署及开发测试

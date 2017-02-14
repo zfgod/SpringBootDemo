@@ -1,4 +1,4 @@
-/*
+
 package com.example.study.jms;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
@@ -9,25 +9,25 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Arrays;
 
-*/
+
 /**
  * author: zf
  * Date: 2016/12/5  19:06
  * Description:
- *//*
+ */
 
-//@Configuration
+@Configuration
 public class MsgApplication  {
     @Value("${jms.broker.url}")
     String url;
-//    @Bean
+    @Bean
     public ActiveMQConnectionFactory activeMQConnectionFactory() {
         ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(url);
 //        factory.setTrustedPackages(Arrays.asList("com.my.package,sys.model.AmqObject".split(",")));
         factory.setTrustAllPackages(true);
-        return factory;*/
-/**//*
+        return factory;
+
 
     }
 }
-*/
+

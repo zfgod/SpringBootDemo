@@ -23,6 +23,7 @@ public class LogAspect {
        //声明切点
        public void annotationPointCut(){};
 
+       //方法执行后执行
        @After("annotationPointCut()")
        public void after(JoinPoint joinpoint){
            MethodSignature signature = (MethodSignature) joinpoint.getSignature();
@@ -32,7 +33,7 @@ public class LogAspect {
            System.out.println("注解式拦截---"+logAction.name()+"-"+logAction.key());//
        }
 
-
+       //方法执行前执行
        @Before("execution(* com.example.study.aop.DemoMethodService.*(..))")
 //       @Before("execution(* com.example.study..*.*(..))")
        public void before(JoinPoint joinpoint){
