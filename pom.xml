@@ -7,7 +7,6 @@
     <artifactId>springBootDemo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <!--<packaging>war</packaging>-->
 
     <name>springBootDemo</name>
     <description>Demo project for Spring Boot</description>
@@ -25,12 +24,12 @@
     </properties>
     <repositories>
 
-       <repository>
-           <id>nexus</id>
-           <name>Human Readable Name for this Mirror.</name>
-           <layout>default</layout>
-           <url>http://192.168.100.11:8081/nexus/content/groups/public/</url>
-       </repository>
+       <!--<repository>-->
+           <!--<id>nexus</id>-->
+           <!--<name>Human Readable Name for this Mirror.</name>-->
+           <!--<layout>default</layout>-->
+           <!--<url>http://192.168.100.11:8081/nexus/content/groups/public/</url>-->
+       <!--</repository>-->
         <repository>
             <id>cen</id>
             <name>c Repository</name>
@@ -69,7 +68,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.4.1.RELEASE</version>
+        <version>2.1.5.RELEASE</version>
         <relativePath/>
         <!-- lookup parent from repository -->
     </parent>
@@ -187,6 +186,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
+            <version>5.2.4.Final</version>
             <!--5.2.4.Final-->
         </dependency>
         <dependency>
@@ -215,6 +215,13 @@
         </dependency>
 
          <!--jms之activeMQ-->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
+        </dependency>
+
+        <!-- jms之activeMQ-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-activemq</artifactId>
